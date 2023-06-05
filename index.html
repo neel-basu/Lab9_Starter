@@ -70,19 +70,19 @@
 
     <section id="error-btns">
       <button onclick = "consoleLog()">Console Log</button>
-      <button>Console Error</button>
-      <button>Console Count</button>
-      <button>Console Warn</button>
-      <button>Console Assert</button>
-      <button>Console Clear</button>
-      <button>Console Dir</button>
-      <button>Console dirxml</button>
-      <button>Console Group Start</button>
-      <button>Console Group End</button>
-      <button>Console Table</button>
-      <button>Start Timer</button>
-      <button>End Timer</button>
-      <button>Console Trace</button>
+      <button onclick = "consoleError()">Console Error</button>
+      <button onclick = "consoleCount()">Console Count</button>
+      <button onclick = "consoleWarn()">Console Warn</button>
+      <button onclick = "consoleAssert()">Console Assert</button>
+      <button onclick = "consoleClear()">Console Clear</button>
+      <button onclick = "consoleDir(this)">Console Dir</button>
+      <button onclick = "consoleDirxml(this)">Console dirxml</button>
+      <button onclick = "consoleGroupStart()">Console Group Start</button>
+      <button onclick = "consoleGroupEnd()">Console Group End</button>
+      <button onclick = "consoleTable()">Console Table</button>
+      <button onclick = "startTimer()">Start Timer</button>
+      <button onclick = "endTimer()">End Timer</button>
+      <button onclick = "consoleTrace()">Console Trace</button>
       <button>Trigger a Global Error</button>
     </section>
   </main>
@@ -106,7 +106,79 @@
     function consoleLog() {
       console.log('Console Log Demo');
     }
+
+    function consoleError() {
+      console.error("Console Error Demo");
+    }
+
+    function consoleCount() {
+      console.count('Count Button:');
+    }
+
+    function consoleWarn() {
+      console.warn('Console Warn Button')
+    }
+
+    function consoleAssert() {
+      const number = 2;
+      const errorMsg = 'The number does not equal 3';
+      console.assert(number == 3, {number, errorMsg});
+    }
+
+    function consoleClear() {
+      console.clear();
+    }
     
+    function consoleDir(obj) {
+      console.dir(obj);
+    }
+
+    function consoleDirxml(obj) {
+      console.dirxml(obj);
+    }
+
+    function consoleGroupStart() {
+      console.group('console.group');
+    }
+
+    function consoleGroupEnd() {
+      console.groupEnd('console.group');
+    }
+
+    function consoleTable() {
+      var classes = [
+        {
+          name: 'Software Engineering',
+          num: 110,
+        },
+        {
+          name: 'Programming Languages: Principles and Paradigms',
+          num: 130,
+        },
+        {
+          name: 'Advanced Software Engineering',
+          num: 112,
+        }
+      ];
+      console.table(classes);
+    }
+
+    function startTimer() {
+      console.time('Timer Button');
+    }
+
+    function endTimer() {
+      console.timeEnd('Timer Button');
+    }
+
+    function consoleTrace() {
+      const handleBtnClick = () => { deep(); };
+      const deep = () => { deeper(); };
+      const deeper = () => { deepest(); };
+      const deepest = () => { console.trace(); };
+      handleBtnClick();
+    }
+
   </script>
 </body>
 
