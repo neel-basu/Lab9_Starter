@@ -88,6 +88,15 @@
   </main>
 
   <script>
+
+    // Step 4
+    class NaNError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'NaNError'
+      }
+    }
+
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -95,18 +104,29 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+
+      // Step 3
+      let result = '';
+      try {
+        if (isNaN(firstNum) || isNaN(secondNum)) {
+          throw new NaNError('Please input numbers only');
+        }
+        result = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        output.innerHTML = result;
+      }
+
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
-
-    // Start your code here
-    // You may move this JS to another file if you wish
 
     window.addEventListener('error', () => {
       console.log('Sadly an error happened my friend');
     })
 
+    // Step 2
     function consoleLog() {
       console.log('Console Log Demo');
     }
