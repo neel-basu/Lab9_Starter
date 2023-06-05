@@ -83,7 +83,7 @@
       <button onclick = "startTimer()">Start Timer</button>
       <button onclick = "endTimer()">End Timer</button>
       <button onclick = "consoleTrace()">Console Trace</button>
-      <button>Trigger a Global Error</button>
+      <button onclick = "globalError()">Trigger a Global Error</button>
     </section>
   </main>
 
@@ -103,12 +103,16 @@
     // Start your code here
     // You may move this JS to another file if you wish
 
+    window.addEventListener('error', () => {
+      console.log('Sadly an error happened my friend');
+    })
+
     function consoleLog() {
       console.log('Console Log Demo');
     }
 
     function consoleError() {
-      console.error("Console Error Demo");
+      console.error('Console Error Demo');
     }
 
     function consoleCount() {
@@ -172,11 +176,23 @@
     }
 
     function consoleTrace() {
-      const handleBtnClick = () => { deep(); };
-      const deep = () => { deeper(); };
-      const deeper = () => { deepest(); };
-      const deepest = () => { console.trace(); };
+      function handleBtnClick() {
+        function deep() {
+          function deeper() {
+            function deepest() {
+              console.trace();
+            }
+            deepest();
+          }
+          deeper();
+        }
+        deep();
+      }
       handleBtnClick();
+    }
+
+    function globalError() {
+      handleBtnClick(boom);
     }
 
   </script>
